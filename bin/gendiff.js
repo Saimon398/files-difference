@@ -1,4 +1,11 @@
 #!/usr/bin/env node
-import gendiff from '../src/generateDiff.js';
+import { program } from 'commander';
 
-gendiff.parse();
+program
+  .name('gendiff')
+  .description('Compares two configuration files and shows a difference.')
+  .version('0.0.1')
+  .arguments('<filepath1> <filepath2>')
+  .option('-f, --format <type>', 'output format')
+  .parse(process.argv);
+
