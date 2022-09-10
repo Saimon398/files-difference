@@ -1,0 +1,26 @@
+{
+  "name": "@hexlet/code",
+  "version": "0.0.1",
+  "description": "compare two files and shows a difference",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saimon398/frontend-project-lvl2.git"
+  },
+  "keywords": [
+    "frontend",
+    "compare",
+    "comparison",
+    "diff",
+    "difference"
+  ],
+  "author": "otdameskapizm <aleksborislavskij@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Saimon398/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/Saimon398/frontend-project-lvl2#readme"
+}
