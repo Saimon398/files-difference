@@ -3,7 +3,6 @@ import { program } from 'commander';
 import readFile from '../src/readFile.js';
 import gendiff from '../src/index.js';
 
-
 program
   .name('gendiff')
   .description('Compares two configuration files and shows a difference.')
