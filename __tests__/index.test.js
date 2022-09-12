@@ -17,6 +17,7 @@ const getFixturePath = (filename) => path
 
 describe.each([
   { file1: 'file1.json', file2: 'file2.json', expected: 'json-dif.txt' },
+  { file1: 'file1.yaml', file2: 'file2.yaml', expected: 'yaml-dif.txt' },
 ])('.add($file1, $file2)', ({ file1, file2, expected }) => {
   test('overall perfomance', () => {
     const received1 = JSON.parse(readFileSync(getFixturePath(file1), 'utf-8'));
