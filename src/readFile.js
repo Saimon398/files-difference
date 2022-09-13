@@ -1,21 +1,26 @@
 import path from 'node:path';
 import process from 'node:process';
-import { readFileSync } from 'node:fs';
+import fs from 'fs';
+import parse from './parsers.js';
 
 /**
- * @description Get absolute path to file
- * @param {String} filepath Relative path to file
+ * @description Return absolute path to file
+ * @param {String} filename Name of file
  * @returns {String} Absolute path to file
  */
-const getAbsolutePath = (filepath) => path
-  .resolve(process.cwd(), '__fixtures__', filepath);
+export const getPathToFile = (filename) => path
+  .resolve(process.cwd(), '__fixtures__', filename);
 
 /**
- * @description Get content of file in JSON format
- * @param {String} filepath Absolute path to file
- * @returns {any} Content in file with given filepath
+ * @description Return data of file
+ * @param {String} filepath Path to file
+ * @returns {any} Data
  */
-export default (filepath) => {
-  const pathToFile = getAbsolutePath(filepath);
-  return JSON.parse(readFileSync(pathToFile));
-};
+export const readFile = (filepath) => fs.readFileSync(filepath);
+
+/**
+ * @description Return parsed data
+ * @param {String} content File content
+ * @returns {any} Parsed data
+ */
+export const getData = (content, extension) => parse(content, extension);

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { program } from 'commander';
-import readFile from '../src/readFile.js';
+import path from 'node:path';
+import { getPathToFile, readFile, getData } from '../src/readFile.js';
 import gendiff from '../src/index.js';
 
 program
@@ -9,8 +10,15 @@ program
   .version('0.0.1')
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format <type>', 'output format')
-  .action((filepath1, filepath2) => {
-    const difference = gendiff(readFile(filepath1), readFile(filepath2));
+  .action((filename1, filename2) => {
+    const data = [filename1, filename2]
+      .map((filename) => getPathToFile(filename.toString()))
+      .map((filepath) => [readFile(filepath), path.extname(filepath)])
+      .map(([content, extension]) => getData(content, extension));
+
+    const difference = gendiff(...data);
+
     console.log(difference);
-  })
-  .parse(process.argv);
+  });
+
+program.parse(process.argv);
