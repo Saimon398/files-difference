@@ -10,12 +10,12 @@ import plain from './plain.js';
 export default (data, format) => {
   switch (format) {
     case 'stylish':
-      return stylish(data).toString();
+      return stylish(data);
     case 'plain':
-      return plain(data).toString();
+      return plain(data);
     case 'json':
-      return JSON.stringify(data).toString();
+      return JSON.stringify(data);
     default:
-      return stylish(data).toString();
+      return stylish(data);
   }
 };

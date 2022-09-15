@@ -9,7 +9,7 @@ program
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format <type>', 'output format', 'stylish')
   .action((filename1, filename2) => {
-    const difference = gendiff(filename1, filename2, program.opts().format).toString();
+    const difference = gendiff(filename1, filename2, program.opts().format);
     console.log(difference);
   });
 

@@ -10,7 +10,9 @@ export default (data, extension) => {
   switch (extension) {
     case '.json':
       return JSON.parse(data);
-    case '.yaml' || '.yml':
+    case '.yaml':
+      return yaml.load(data);
+    case '.yml':
       return yaml.load(data);
     default:
       return data;
