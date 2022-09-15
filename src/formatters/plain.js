@@ -4,9 +4,10 @@
  * @returns {String | Number | Boolean | Object}
  */
 const getValue = (value) => {
-  if (typeof value === 'object') {
+  if (typeof value === 'object' && value !== null) {
     return '[complex value]';
-  } if (typeof value === 'string') {
+  }
+  if (typeof value === 'string') {
     return `'${value}'`;
   }
   return value;
@@ -29,11 +30,11 @@ const plain = (difference, parent) => difference
       case 'nested':
         return `${plain(children, prop)}`;
       case 'added':
-        return `Property ${prop} was added with value: ${getValue(value)}`;
+        return `Property '${prop}' was added with value: ${getValue(value)}`;
       case 'deleted':
-        return `Property ${prop} was removed`;
+        return `Property '${prop}' was removed`;
       case 'changed':
-        return `Property ${prop} was updated. From ${getValue(value1)} to ${getValue(value2)}`;
+        return `Property '${prop}' was updated. From ${getValue(value1)} to ${getValue(value2)}`;
       default:
         throw new Error('Such type is not supported');
     }

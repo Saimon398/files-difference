@@ -2,8 +2,8 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { test, expect, describe } from '@jest/globals';
 import { readFile, getData } from '../src/readFile.js';
-import gendiff from '../src/index.js';
-import stylish from '../src/formatters/stylish.js';
+import formatDiff from '../src/formatters/index.js';
+import buildTree from '../src/buildTree.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,7 +31,8 @@ describe.each([
       .map(getFixturePath)
       .map((filepath) => [readFile(filepath), path.extname(filepath)])
       .map(([content, extension]) => getData(content, extension));
-    expect(gendiff(received1, received2, 'stylish')).toEqual(expected.toString());
+    const difference = formatDiff(buildTree(received1, received2), 'stylish');
+    expect(difference).toEqual(expected.toString());
   });
   test('plain format', () => {
     const [received1, received2, expected] = [file1, file2, plain]
@@ -39,7 +40,8 @@ describe.each([
       .map((filepath) => [readFile(filepath), path.extname(filepath)])
       .map(([content, extension]) => getData(content, extension));
 
-    expect(gendiff(received1, received2, 'plain')).toEqual(expected.toString());
+    const difference = formatDiff(buildTree(received1, received2), 'plain');
+    expect(difference).toEqual(expected.toString());
   });
 });
 
