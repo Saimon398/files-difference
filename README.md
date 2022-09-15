@@ -25,7 +25,7 @@ This tool helps you **compare two files** in json and yaml (yml) formats now mat
 
     make lint
 
-### How To Use
+### Quick Start
 
 Unitlity help can be displayed after entering the following command:
 
@@ -42,28 +42,19 @@ Yield the following help output
     -f, --format <type>  output format (default: "stylish")
     -h, --help display help for command
 
-### Games Description
+### File Comparison
 
-There are a total of 5 games, each of which is named according to the command it is launched with. Every game has common logic: **player is asked three questions** with different content and **he needs to give correct answer to keep playing. If players cannot answer correctly, game is over**. Every question is about operations with numbers from 0 to 100.
+File **comparison** might be realised between two files, that can have whether **json** or **yaml** formats. Start comparing can be launched by following command:
 
-    brain-even   		# guess if the displayed number is even
+    gendiff <filepath1> <filepath2>
 
-    brain-calc   		# give correct answer for math operation
+Result of comparison can be returned in three different formats: stylish (default format), plain and json. To display result in specific format, special option is used. Default format is stylish.
 
-    brain-gcd    		# find the greatest common divisor
+    gendiff --format <format> <filepath1> <filepath2>
 
-    brain-prime  		# guess if the displayed number is prime
-
-    brain-progression	# find missing number in progression
-
-There are links to the asccinema records demonstrating different game processes below. You can see how to play these games and then try it by yourself.
-
-| GAMES             | GAME PROCESS                                      |
-| ----------------- | ------------------------------------------------- |
-| brain-even        | https://asciinema.org/a/NRe64g7zPVHsuAaT9AQzbIW80 |
-| brain-calc        | https://asciinema.org/a/hWIQ7SCi0MPf0HQ2VeWsyIOsb |
-| brain-prime       | https://asciinema.org/a/NOQMmdmlBL1Y8RkX2G8nOca72 |
-| brain-gcd         | https://asciinema.org/a/lm41mRlLjdzn9LlY76uinCUIb |
-| brain-progression | https://asciinema.org/a/wWntl1Cdm0U8vlI7SfBwFRi9R |
-
-ENJOY YOUR GAME :)
+At the following links result of comparison in different formats can be seen:
+|FORMAT|COMPARISON PROCESS|
+|------------|---------|
+|stylish|https://asciinema.org/a/0z1nfWjTPUNlW0LX6MB5fEs5u|
+|plain|https://asciinema.org/a/RqaQDbp5VXyMMMbA2f1UPw9rV|
+|json|https://asciinema.org/a/CmFKDAMmPyeLZcYMZ6TPzhH1a |
