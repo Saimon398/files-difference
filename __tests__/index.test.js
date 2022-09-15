@@ -1,11 +1,18 @@
-import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { test, expect, describe } from '@jest/globals';
 import { readFile, getData } from '../src/readFile.js';
 import formatDiff from '../src/formatters/index.js';
 import buildTree from '../src/buildTree.js';
 
+/**
+ * @description Return URL path
+ */
 const __filename = fileURLToPath(import.meta.url);
+
+/**
+ * @description Return path to dir
+ */
 const __dirname = path.dirname(__filename);
 
 /**
@@ -26,7 +33,7 @@ describe.each([
 ])('.add($file1, $file2)', ({
   file1, file2, stylish, plain, json,
 }) => {
-  test('stylish format', () => {
+  test('Stylish format', () => {
     const [received1, received2, expected] = [file1, file2, stylish]
       .map(getFixturePath)
       .map((filepath) => [readFile(filepath), path.extname(filepath)])
@@ -34,21 +41,19 @@ describe.each([
     const difference = formatDiff(buildTree(received1, received2), 'stylish');
     expect(difference).toEqual(expected.toString());
   });
-  test('plain format', () => {
+  test('Plain format', () => {
     const [received1, received2, expected] = [file1, file2, plain]
       .map(getFixturePath)
       .map((filepath) => [readFile(filepath), path.extname(filepath)])
       .map(([content, extension]) => getData(content, extension));
-
     const difference = formatDiff(buildTree(received1, received2), 'plain');
     expect(difference).toEqual(expected.toString());
   });
-  test('json format', () => {
+  test('Json format', () => {
     const [received1, received2, expected] = [file1, file2, json]
       .map(getFixturePath)
       .map((filepath) => [readFile(filepath), path.extname(filepath)])
       .map(([content, extension]) => getData(content, extension));
-
     const difference = formatDiff(buildTree(received1, received2), 'json');
     expect(difference).toEqual(expected.toString());
   });
