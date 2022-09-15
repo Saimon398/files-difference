@@ -1,12 +1,13 @@
+import _ from 'lodash';
+
 /**
  * @description Return difference
  * @param {Object {}} data1 First data
  * @param {Object {}} data2 Second data
  * @returns {Object []} Difference
  */
-const buildTree = (data1, data2) => Object
-  .keys({ ...data1, ...data2 })
-  .sort()
+const buildTree = (data1, data2) => _.sortBy(Object
+  .keys({ ...data1, ...data2 }))
   .map((key) => {
     const value1 = data1[key];
     const value2 = data2[key];
