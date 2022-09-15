@@ -18,13 +18,13 @@ const getFixturePath = (filename) => path
 
 describe.each([
   {
-    file1: 'file1.json', file2: 'file2.json', stylish: 'stylish-dif.txt', plain: 'plain-dif.txt',
+    file1: 'file1.json', file2: 'file2.json', stylish: 'stylish-dif.txt', plain: 'plain-dif.txt', json: 'json-dif.txt',
   },
   {
-    file1: 'file1.yaml', file2: 'file2.yaml', stylish: 'stylish-dif.txt', plain: 'plain-dif.txt',
+    file1: 'file1.yaml', file2: 'file2.yaml', stylish: 'stylish-dif.txt', plain: 'plain-dif.txt', json: 'json-dif.txt',
   },
 ])('.add($file1, $file2)', ({
-  file1, file2, stylish, plain,
+  file1, file2, stylish, plain, json,
 }) => {
   test('stylish format', () => {
     const [received1, received2, expected] = [file1, file2, stylish]
@@ -43,6 +43,13 @@ describe.each([
     const difference = formatDiff(buildTree(received1, received2), 'plain');
     expect(difference).toEqual(expected.toString());
   });
-});
+  test('json format', () => {
+    const [received1, received2, expected] = [file1, file2, json]
+      .map(getFixturePath)
+      .map((filepath) => [readFile(filepath), path.extname(filepath)])
+      .map(([content, extension]) => getData(content, extension));
 
-// Нужно поменять структуру, так как gendiff работает с одним путем до данных...
+    const difference = formatDiff(buildTree(received1, received2), 'json');
+    expect(difference).toEqual(expected.toString());
+  });
+});
