@@ -1,7 +1,7 @@
 import path from 'node:path';
-import buildTree from './buildTree.js';
-import formatDiff from './formatters/index.js';
-import { getPathToFile, readFile, getData } from './readFile.js';
+import buildTree from './src/buildTree.js';
+import formatDiff from './src/formatters/index.js';
+import { getPathToFile, readFile, getData } from './src/readFile.js';
 
 /**
  * @description Return difference between two objects
