@@ -13,6 +13,8 @@ export default (data, format) => {
       return stylish(data);
     case 'plain':
       return plain(data);
+    case 'json':
+      return JSON.stringify(data); // Возможно стоит переписать
     default:
       return stylish(data);
   }
