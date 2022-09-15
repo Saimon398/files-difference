@@ -15,5 +15,5 @@ export default (filename1, filename2, format = 'stylish') => {
     .map((filepath) => [readFile(filepath), path.extname(filepath)])
     .map(([content, extension]) => getData(content, extension));
   const difference = formatDiff(buildTree(...data), format);
-  return difference;
+  return difference.toString();
 };
