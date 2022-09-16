@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-// import { test, expect, describe } from '@jest/globals';
+import { test, expect, describe } from '@jest/globals';
 import { readFile, getData } from '../src/readFile.js';
 import formatDiff from '../src/formatters/index.js';
 import buildTree from '../src/buildTree.js';
@@ -58,4 +58,3 @@ describe.each([
     expect(difference).toEqual(expected);
   });
 });
-
