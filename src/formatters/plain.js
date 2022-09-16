@@ -1,16 +1,16 @@
+import { when } from 'pattern-matching-js';
 /**
- * @description Return value according to its type
+ * @description Return processed value according to its type
  * @param {String | Number | Boolean | Object} value
- * @returns {String | Number | Boolean | Object}
+ * @returns {String | Number | Boolean | Object} processed value
  */
-const getValue = (value) => {
-  if (typeof value === 'object' && value !== null) {
-    return '[complex value]';
-  }
-  if (typeof value === 'string') {
-    return `'${value}'`;
-  }
-  return value;
+const changeTypeOfValue = (value) => {
+  const processedValue = when(true)
+    .case(typeof value === 'object' && value !== null, () => '[complex value]')
+    .case(typeof value === 'string', () => `'${value}'`)
+    .case(true, () => value)
+    .end();
+  return processedValue;
 };
 
 /**
@@ -26,18 +26,14 @@ const plain = (difference, parent) => difference
       type, key, children, value, value1, value2,
     } = node;
     const prop = parent ? `${parent}.${key}` : `${key}`;
-    switch (type) {
-      case 'nested':
-        return `${plain(children, prop)}`;
-      case 'added':
-        return `Property '${prop}' was added with value: ${getValue(value)}`;
-      case 'deleted':
-        return `Property '${prop}' was removed`;
-      case 'changed':
-        return `Property '${prop}' was updated. From ${getValue(value1)} to ${getValue(value2)}`;
-      default:
-        throw new Error('Such type is not supported');
-    }
+    const line = when(type)
+      .case('nested', () => `${plain(children, prop)}`)
+      .case('added', () => `Property '${prop}' was added with value: ${changeTypeOfValue(value)}`)
+      .case('deleted', () => `Property '${prop}' was removed`)
+      .case('changed', () => `Property '${prop}' was updated. From ${changeTypeOfValue(value1)} to ${changeTypeOfValue(value2)}`)
+      .end();
+
+    return line;
   }).join('\n');
 
 export default plain;

@@ -1,6 +1,6 @@
+import { when } from 'pattern-matching-js';
 import stylish from './stylish.js';
 import plain from './plain.js';
-
 /**
  * @description Return formatted data
  * @param {Object} data
@@ -8,14 +8,10 @@ import plain from './plain.js';
  * @returns {String} Formatted data
  */
 export default (data, format) => {
-  switch (format) {
-    case 'stylish':
-      return stylish(data);
-    case 'plain':
-      return plain(data);
-    case 'json':
-      return JSON.stringify(data);
-    default:
-      return stylish(data);
-  }
+  const formattedData = when(format)
+    .case('stylish', () => stylish(data))
+    .case('plain', () => plain(data))
+    .case('json', () => JSON.stringify(data))
+    .end();
+  return formattedData;
 };

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { when } from 'pattern-matching-js';
 
 /**
  * @description Return difference
@@ -12,20 +13,19 @@ const buildTree = (data1, data2) => _.sortBy(Object
     const value1 = data1[key];
     const value2 = data2[key];
 
-    if (typeof value1 === 'object' && typeof value2 === 'object') {
-      return { type: 'nested', key, children: buildTree(value1, value2) };
-    }
-    if (!Object.hasOwn(data1, key)) {
-      return { type: 'added', key, value: value2 };
-    }
-    if (!Object.hasOwn(data2, key)) {
-      return { type: 'deleted', key, value: value1 };
-    }
-    if (value1 === value2) {
-      return { type: 'unchanged', key, value: value1 };
-    }
-    return {
-      type: 'changed', key, value1, value2,
-    };
+    const node = when(true)
+      .case(_.isPlainObject(value1) && _.isPlainObject(value2), () => ({
+        type: 'nested', key, children: buildTree(value1, value2),
+      }))
+      .case(!_.has(data1, key), () => ({ type: 'added', key, value: value2 }))
+      .case(!_.has(data2, key), () => ({ type: 'deleted', key, value: value1 }))
+      .case(value1 === value2, () => ({ type: 'unchanged', key, value: value1 }))
+      .case(value1 !== value2, () => ({
+        type: 'changed', key, value1, value2,
+      }))
+      .end();
+
+    return node;
   });
+
 export default buildTree;

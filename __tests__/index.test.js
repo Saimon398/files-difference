@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { test, expect, describe } from '@jest/globals';
+// import { test, expect, describe } from '@jest/globals';
 import { readFile, getData } from '../src/readFile.js';
 import formatDiff from '../src/formatters/index.js';
 import buildTree from '../src/buildTree.js';
@@ -39,7 +39,7 @@ describe.each([
       .map((filepath) => [readFile(filepath), path.extname(filepath)])
       .map(([content, extension]) => getData(content, extension));
     const difference = formatDiff(buildTree(received1, received2), 'stylish');
-    expect(difference).toEqual(expected.toString());
+    expect(difference).toEqual(expected);
   });
   test('Plain format', () => {
     const [received1, received2, expected] = [file1, file2, plain]
@@ -55,6 +55,7 @@ describe.each([
       .map((filepath) => [readFile(filepath), path.extname(filepath)])
       .map(([content, extension]) => getData(content, extension));
     const difference = formatDiff(buildTree(received1, received2), 'json');
-    expect(difference).toEqual(expected.toString());
+    expect(difference).toEqual(expected);
   });
 });
+

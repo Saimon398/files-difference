@@ -1,4 +1,5 @@
 import yaml from 'js-yaml';
+import { when } from 'pattern-matching-js';
 
 /**
  * @description Parse file depending on the extension
@@ -7,14 +8,11 @@ import yaml from 'js-yaml';
  * @returns {any} parsed data
  */
 export default (data, extension) => {
-  switch (extension) {
-    case '.json':
-      return JSON.parse(data);
-    case '.yaml':
-      return yaml.load(data);
-    case '.yml':
-      return yaml.load(data);
-    default:
-      return data;
-  }
+  const parsedData = when(extension)
+    .case('.json', () => JSON.parse(data))
+    .case('.yaml', () => yaml.load(data))
+    .case('.yml', () => yaml.load(data))
+    .case('.txt', () => data.toString())
+    .end();
+  return parsedData;
 };
