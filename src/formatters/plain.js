@@ -1,6 +1,7 @@
 import { when } from 'pattern-matching-js';
+
 /**
- * @description Return processed value according to its type
+ * @description Returns processed value according to its type
  * @param {String | Number | Boolean | Object} value
  * @returns {String | Number | Boolean | Object} processed value
  */

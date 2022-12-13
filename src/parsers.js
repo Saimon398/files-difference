@@ -1,18 +1,20 @@
 import yaml from 'js-yaml';
-import { when } from 'pattern-matching-js';
+
+const PARSERS = {
+  '.json': (data) => JSON.parse(data),
+  '.yaml': (data) => yaml.load(data),
+  '.yml': (data) => yaml.load(data),
+  '.txt': (data) => data.toString(),
+};
 
 /**
- * @description Parse file depending on the extension
+ * @description Returns parsed data
  * @param {any} data
  * @param {String} extension
- * @returns {any} parsed data
+ * @returns {any} Parsed data
  */
 export default (data, extension) => {
-  const parsedData = when(extension)
-    .case('.json', () => JSON.parse(data))
-    .case('.yaml', () => yaml.load(data))
-    .case('.yml', () => yaml.load(data))
-    .case('.txt', () => data.toString())
-    .end();
+  const parser = PARSERS[extension];
+  const parsedData = parser(data);
   return parsedData;
 };

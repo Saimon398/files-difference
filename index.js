@@ -4,7 +4,7 @@ import formatDiff from './src/formatters/index.js';
 import { getPathToFile, readFile, getData } from './src/readFile.js';
 
 /**
- * @description Return difference between two objects
+ * @description Returns difference between two objects
  * @param {String} filename1 First file name
  * @param {Object} filename2 Second file name
  * @returns {String} Difference

@@ -1,17 +1,20 @@
-import { when } from 'pattern-matching-js';
 import stylish from './stylish.js';
 import plain from './plain.js';
+
+const FORMATTERS = {
+  stylish: (data) => stylish(data),
+  plain: (data) => plain(data),
+  json: (data) => JSON.stringify(data),
+};
+
 /**
- * @description Return formatted data
- * @param {Object} data
- * @param {String} format
+ * @description Returns formatted data
+ * @param {String} format Format of processing data
+ * @param {Object {}} data Data to be formatted
  * @returns {String} Formatted data
  */
-export default (data, format) => {
-  const formattedData = when(format)
-    .case('stylish', () => stylish(data))
-    .case('plain', () => plain(data))
-    .case('json', () => JSON.stringify(data))
-    .end();
+export default (format, data) => {
+  const formatter = FORMATTERS[format];
+  const formattedData = formatter(data);
   return formattedData;
 };
