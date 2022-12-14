@@ -22,7 +22,7 @@ const __dirname = path.dirname(__filename);
  * @returns {String} Absolute path
  */
 const getFixturePath = (filename) => path
-  .join(__dirname, '..', '__fixtures__', filename);
+  .join(__dirname, '..', 'fixtures', filename);
 
 describe.each([
   {
