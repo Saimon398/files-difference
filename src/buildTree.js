@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { when } from 'pattern-matching-js';
 
 /**
- * @description Return difference
+ * @description Returns difference between two data
  * @param {Object {}} data1 First data
  * @param {Object {}} data2 Second data
  * @returns {Object []} Difference

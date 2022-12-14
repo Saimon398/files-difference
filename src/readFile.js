@@ -1,14 +1,13 @@
 import path from 'node:path';
 import process from 'node:process';
 import fs from 'fs';
-import parse from './parsers.js';
 
 /**
  * @description Returns absolute path to file
  * @param {String} filename Name of file
  * @returns {String} Absolute path to file
  */
-export const getPathToFile = (filename) => path
+const getPathToFile = (filename) => path
   .resolve(process.cwd(), '__fixtures__', filename);
 
 /**
@@ -16,11 +15,9 @@ export const getPathToFile = (filename) => path
  * @param {String} filepath Path to file
  * @returns {any} Data
  */
-export const readFile = (filepath) => fs.readFileSync(filepath);
+const readFile = (filepath) => fs.readFileSync(filepath);
 
-/**
- * @description Returns parsed data
- * @param {String} content File content
- * @returns {any} Parsed data
- */
-export const getData = (content, extension) => parse(content, extension);
+export {
+  getPathToFile,
+  readFile,
+};

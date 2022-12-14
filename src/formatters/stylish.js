@@ -1,15 +1,15 @@
 import { when } from 'pattern-matching-js';
+
 /**
- * @description Return indent
- * @param {String} replacer
+ * @description Returns an indent
  * @param {Number} space
  * @param {Number} depth
- * @returns {String} Indent
+ * @returns {String}
  */
 const getIndent = (depth, space = 4) => ' '.repeat(depth * space);
 
 /**
- * @description Stringify data
+ * @description Stringifies data
  * @param {Object} data
  * @param {Number} depth
  * @returns {String}
@@ -19,8 +19,10 @@ const stringify = (data, depth = 1) => {
     return `${data}`;
   }
   const bracketIndent = getIndent(depth - 1);
-  const lines = Object.entries(data)
+  const lines = Object
+    .entries(data)
     .map(([key, value]) => `${getIndent(depth)}${key}: ${stringify(value, depth + 1)}`);
+
   return ['{', ...lines, `${bracketIndent}}`].join('\n');
 };
 

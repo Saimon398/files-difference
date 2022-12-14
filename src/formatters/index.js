@@ -13,7 +13,7 @@ const FORMATTERS = {
  * @param {Object {}} data Data to be formatted
  * @returns {String} Formatted data
  */
-export default (format, data) => {
+export default (data, format) => {
   const formatter = FORMATTERS[format];
   const formattedData = formatter(data);
   return formattedData;
