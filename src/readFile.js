@@ -8,7 +8,7 @@ import fs from 'fs';
  * @returns {String} Absolute path to file
  */
 const getPathToFile = (filename) => path
-  .resolve(process.cwd(), '__fixtures__', filename);
+  .resolve(process.cwd(), 'fixtures', filename);
 
 /**
  * @description Returns data of file
